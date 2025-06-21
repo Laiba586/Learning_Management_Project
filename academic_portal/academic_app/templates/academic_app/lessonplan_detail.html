@@ -1,0 +1,15 @@
+{% extends 'academic_app/basic.html' %}
+{% block title %}Lesson Plan Detail{% endblock %}
+{% block body %}
+<div class="container mt-4">
+  <h2 class="mb-3">{{ lessonplan.title }}</h2>
+  <p><strong>Teacher:</strong> {{ lessonplan.teacher.name }}</p>
+  <p><strong>Classroom:</strong> {{ lessonplan.classroom.name }}</p>
+  <p><strong>Subject:</strong> {{ lessonplan.subject.name }}</p>
+  <p><strong>Planned Date:</strong> {{ lessonplan.planned_date }}</p>
+  <hr>
+  <h4>Lesson Content:</h4>
+  <p>{{ lessonplan.content }}</p>
+  <a href="{% url 'lessonplan_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+{% endblock %}

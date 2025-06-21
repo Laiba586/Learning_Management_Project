@@ -1,0 +1,73 @@
+{% extends 'academic_app/basic.html' %}
+{% load static %}
+
+{% block title %} Teachers {% endblock %}
+
+{% block css %}
+<style>
+    .teacher-profile {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .teacher-profile img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #007bff;
+    }
+
+    .teacher-card {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border: none;
+        border-radius: 10px;
+        transition: 0.3s;
+        margin-bottom: 25px;
+    }
+
+    .teacher-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .teacher-info {
+        padding: 20px;
+    }
+
+    .teacher-info h5 {
+        font-weight: bold;
+    }
+
+    .teacher-info p {
+        margin-bottom: 5px;
+        color: #555;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Meet Our Teachers</h2>
+    <div class="row justify-content-center">
+        {% for teacher in teachers %}
+        <div class="col-md-4">
+            <div class="card teacher-card">
+                <div class="teacher-profile mt-3">
+                    <img src="/media/{{ teacher.image }}" alt="{{ teacher.name }}">
+                </div>
+                <div class="teacher-info text-center">
+                    <h5>{{ teacher.name }}</h5>
+                    <p><strong>Email:</strong> {{ teacher.email }}</p>
+                    <p><strong>Phone:</strong> {{ teacher.phone }}</p>
+                    <p><strong>Qualification:</strong> {{ teacher.qualification }}</p>
+                    <p><strong>Joining_date:</strong> {{ teacher.joining_date }}</p>
+                    
+                    <p><strong>Department:</strong> {{ teacher.department }}</p>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

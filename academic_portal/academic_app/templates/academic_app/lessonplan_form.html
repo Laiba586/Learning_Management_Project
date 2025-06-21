@@ -1,0 +1,13 @@
+{% extends 'academic_app/basic.html' %}
+{% block title %}Add Lesson Plan{% endblock %}
+{% block body %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Add New Lesson Plan</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save Lesson Plan</button>
+    <a href="{% url 'lessonplan_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

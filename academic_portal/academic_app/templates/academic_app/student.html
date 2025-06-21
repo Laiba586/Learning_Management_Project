@@ -1,0 +1,35 @@
+{% extends 'academic_app/basic.html' %}
+{% block title %}Students{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">All Students</h2>
+  <table class="table table-bordered table-hover text-center">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Classroom</th>
+        <th>Batch</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in students %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.classroom.name }}</td>
+        <td>{{ item.batch.name }}</td>
+        
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

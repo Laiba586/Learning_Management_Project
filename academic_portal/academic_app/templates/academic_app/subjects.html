@@ -1,0 +1,27 @@
+{% extends 'academic_app/basic.html' %}
+{% block title %}Subjects{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Our Subjects</h2>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    {% for subject in subjects %}
+    <div class="col">
+      <div class="card shadow-sm h-100 border-primary">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ subject.name }}</h5>
+          <h5 class="card-subtitle mb-2 text-muted"> Teacher:{{ subject.teacher.name }}</h5>
+          
+          <p class="card-text" style="font-size: 0.9rem;">
+            {{ subject.description|truncatewords:20 }}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center">No subjects found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'academic_app/basic.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %} Weekly Timetable {% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Weekly Timetable</h2>
+
+    {% for class_name, day_data in schedule.items %}
+        <h4 class="mt-5 text-center">{{ class_name }}</h4>
+        <table class="table table-bordered text-center">
+            <thead class="table-primary">
+                <tr>
+                    {% for day in days %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for day in days %}
+                        <td>
+                            {% with day_entries=day_data|dict_get:day %}
+                                {% if day_entries %}
+                                    {% for entry in day_entries %}
+                                        <div class="mb-3 p-2 border rounded bg-light">
+                                            <strong>{{ entry.subject.name }}</strong><br>
+                                            Teacher: {{ entry.teacher.name }}<br>
+                                            {{ entry.start_time|time:"H:i" }} - {{ entry.end_time|time:"H:i" }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="text-muted">No class</span>
+                                {% endif %}
+                            {% endwith %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'academic_app/basic.html' %}
+{% block title %} Teacher Attendance {% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Teacher Attendance</h2>
+
+  <!-- Date Filter Form -->
+  <form method="get" class="text-center mb-4">
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" name="date" value="{{ selected_date|date:'Y-m-d' }}">
+    <button type="submit" class="btn btn-primary btn-sm">Load</button>
+  </form>
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="date" value="{{ selected_date|date:'Y-m-d' }}">
+    
+    <table class="table table-bordered text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Teacher Name</th>
+          <th>Present</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for teacher in teachers %}
+        <tr>
+          <td>{{ teacher.name }}</td>
+          <td>
+            <input type="checkbox" name="present_{{ teacher.id }}" {% if teacher.id in present_ids %}checked{% endif %}>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-success">Save Attendance</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

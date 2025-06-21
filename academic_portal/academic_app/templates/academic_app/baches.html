@@ -1,0 +1,94 @@
+{% extends 'academic_app/basic.html' %}
+
+{% block body %}
+<style>
+  .table-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+  }
+
+  .table-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background-color: #f0f0f0;
+  }
+
+  th, td {
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    font-weight: 600;
+    color: #333;
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+    transition: 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .table-container {
+      padding: 15px;
+    }
+
+    .table-title {
+      font-size: 1.5rem;
+    }
+
+    th, td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+</style>
+
+<div class="table-container">
+  <div class="table-title">All Batches</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Batch Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Course</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for batch in batches %}
+      <tr>
+        <td>{{ batch.name }}</td>
+        <td>{{ batch.start_date }}</td>
+        <td>{{ batch.end_date }}</td>
+        <td>  {% for course in batch.courses.all %}
+           {{ course.name}}{% if not forloop.last %}, {% endif %}
+             {% endfor %}
+       </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" style="text-align:center;">No batches available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

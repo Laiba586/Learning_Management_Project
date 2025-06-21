@@ -1,0 +1,31 @@
+{% extends 'academic_app/basic.html' %}
+{% block title %}Classrooms{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">📘 All Classrooms</h2>
+
+    <div class="row">
+        {% for room in classrooms %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-primary h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ room.name }}</h5>
+                    <p><strong>Batch:</strong> {{ room.batch.name }}</p>
+                    <p><strong>Course:</strong> {{ room.course.name }}</p>
+                    <p><strong>Subjects:</strong>
+                        <ul class="mb-0">
+                            {% for subject in room.subjects.all %}
+                            <li>{{ subject.name }}</li>
+                            {% empty %}
+                            <li>No subjects assigned</li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
